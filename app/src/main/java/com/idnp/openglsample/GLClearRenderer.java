@@ -8,8 +8,10 @@ import android.opengl.GLSurfaceView.Renderer;
 
 public class GLClearRenderer implements Renderer {
 
+    private Pyramid mPyramid = new Pyramid();
     private Cube mCube = new Cube();
     private float mCubeRotation;
+    private float mPyramidRotation;
 
     public void onDrawFrame( GL10 gl ) {
         // This method is called per frame, as the name suggests.
@@ -20,15 +22,19 @@ public class GLClearRenderer implements Renderer {
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
 
-        gl.glTranslatef(0.0f, 0.0f, -10.0f);
+        gl.glTranslatef(-3.0f, 0.0f, -7.0f);
         gl.glRotatef(mCubeRotation, 1.0f, 1.0f, 1.0f);
-
         mCube.draw(gl);
+
+        gl.glLoadIdentity();
+        gl.glTranslatef(3.0f, 0.0f, -7.0f);
+        gl.glRotatef(mPyramidRotation, 1.0f, 1.0f, 1.0f);
+        mPyramid.draw(gl);
 
         gl.glLoadIdentity();
 
         mCubeRotation -= 0.15f;
-
+        mPyramidRotation +=0.2f;
 
     }
 
